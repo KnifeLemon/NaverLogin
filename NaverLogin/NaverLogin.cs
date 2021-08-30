@@ -38,7 +38,7 @@ namespace NaverLogin
         /// <summary>
         /// Bvsd 전용 uuid
         /// </summary>
-        /// <param name="seq">재시도 회수</param>
+        /// <param name="seq">재시도 횟수</param>
         /// <returns></returns>
         private static string GenerateBvsdUUID(int seq = 0)
         {
@@ -126,7 +126,7 @@ namespace NaverLogin
             string encData = "{\"a\":\"" + uuid + "\",\"b\":\"1.3.4\",\"c\":true,\"d\":[{\"i\":\"id\",\"a\":[],\"b\":{\"a\":[\"0," + id + "\"],\"b\":0},\"c\":\"\",\"d\":\"" + id + "\",\"e\":false,\"f\":false},{\"i\":\"pw\",\"a\":[],\"b\":{\"a\":[\"0,\"],\"b\":0},\"c\":\"\",\"d\":\"\",\"e\":true,\"f\":false}],\"h\":\"1f\",\"i\":{\"a\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36 Edg/92.0.902.84\"}}";
             string bvsd = "{\"uuid\":\"" + uuid + "\",\"encData\":\"" + LZString.compressToEncodedURIComponent(encData) + "\"}";
 
-            byte[] data = Encoding.ASCII.GetBytes($"localechange=dynamicKey={dynamicKey}&encpw={strEncParam}&enctp=1&svctype=1&smart_LEVEL=-1&bvsd={bvsd}&encnm={strSessionName}&locale=ko_KR&url=https%3A%2F%2Fwww.naver.com&id=&pw=");
+            byte[] data = Encoding.ASCII.GetBytes($"localechange=&dynamicKey={dynamicKey}&encpw={strEncParam}&enctp=1&svctype=1&smart_LEVEL=-1&bvsd={bvsd}&encnm={strSessionName}&locale=ko_KR&url=https%3A%2F%2Fwww.naver.com&id=&pw=");
             HttpWebRequest postreq = (HttpWebRequest)HttpWebRequest.Create("https://nid.naver.com/nidlogin.login");
             postreq.Method = "POST";
             postreq.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36 Edg/92.0.902.84";
